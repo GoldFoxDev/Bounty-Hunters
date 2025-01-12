@@ -1,0 +1,6 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Support\n
+    url: mailto:lucascpichette@outlook.com
+    about: Questions or issues unrelated to code go here.
+
