@@ -1,4 +1,4 @@
-# Contributing to Memorial
+# Contributing to Bounty Hunters
 
 I value you -- taking the time to read this, contributing to this project, and helping make a meaningful impact to those who've experienced immeasurable loss.
 
@@ -16,7 +16,7 @@ I value you -- taking the time to read this, contributing to this project, and h
 You need to know how to use simple commands:
 1. Mac: `ls`; Windows: `dir`  ==  List files and directories
 2. `mkdir <directory-name>` ==  Makes a folder/"directory" within your current folder/directory.
-3. `cd <directory>` (e.g. `cd Desktop`) == Changes directory to specified directory (`..` is the previous directory, so if in `Desktop/memorial` `cd ..` takes you to `Desktop`)
+3. `cd <directory>` (e.g. `cd Desktop`) == Changes directory to specified directory (`..` is the previous directory, so if in `Desktop/Bounty-Hunters` `cd ..` takes you to `Desktop`)
 
 You need to download [git](https://git-scm.com/downloads) and know the following git commands:
 1. `git status`: Review status of files (changed, deleted, created)
@@ -33,8 +33,8 @@ You need to download [git](https://git-scm.com/downloads) and know the following
 7. Mac: `cd ~`; Windows: `cd %HOMEPATH%`
 8. `mkdir -p Desktop/memorial` -- or wherever you want this project to live on your computer. 
 9. `cd Desktop/memorial` -- or wherever you chose
-10. clone your repository `git clone https://github.com/YOUR-USERNAME/memorial .` (the `.` at the end will create it in the current folder instead of creating a new one for it): https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo#cloning-your-forked-repository
-11. If you cloned without the dot, `cd memorial`. If you cloned with it, then just proceed. **Do not close your terminal.** If you did, no worries, just repeat steps 5-8 & 10 again before you complete step 14.
+10. clone your repository `git clone https://github.com/YOUR-USERNAME/Bounty-Hunters .` (the `.` at the end will create it in the current folder instead of creating a new one for it): https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo#cloning-your-forked-repository
+11. If you cloned without the dot, `cd Bounty-Hunters`. If you cloned with it, then just proceed. **Do not close your terminal.** If you did, no worries, just repeat steps 5-8 & 10 again before you complete step 14.
 12. Import the file from this location into penpot: https://help.penpot.app/user-guide/import-export/#files-import
 13. Make your changes in penpot
 14. Export your changes from penpot into that file and overwrite the existing file with your exported file: https://help.penpot.app/user-guide/import-export/#files-export
@@ -79,24 +79,15 @@ You need to download [git](https://git-scm.com/downloads) and know the following
 
 ## How to Contribute
 
-### Glossary
-
-1. Remembered Souls - Cards which contain an image, name, cause of death, and brief description of a life lost.
-2. Our Mission of Remembrance - The root page of the project which describes the project and its mission.
-3. In Memoriam - The page showing the list of Remembered Souls
-4. Profile Page - Standard profile page for those who have created their account (required to post lost loved ones)
-5. Your Submissions Page - The page in which registered users can view their postings of lost loved ones.
-6. A Life Remembered - The page in which stories and greater details of a lost loved one can be shared.
-
 ### Reporting Issues
 
-- Check the [existing issues](https://github.com/lcpichette/healthcare-memorial/issues) to ensure your issue hasn’t already been reported.
+- Check the [existing issues](https://github.com/GoldFoxDev/Bounty-Hunters/issues/new/choose) to ensure your issue hasn’t already been reported.
 - If new, create a detailed issue, providing all necessary context, screenshots, or error messages.
 
 ### Working on Issues
 
 1. **Find an Issue**
-   - Browse the [issues list](https://github.com/[org-name]/[project-name]/issues) for an issue to work on.
+   - Browse the [issues list](https://github.com/GoldFoxDev/Bounty-Hunters/issues) for an issue to work on.
    - Look for issues labeled `good first issue` if you’re a beginner.
 
 2. **Assign Yourself**
