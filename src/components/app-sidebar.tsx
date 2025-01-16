@@ -2,10 +2,8 @@
 
 import * as React from "react"
 import {
-  Waves,
   BookOpen,
   Bot,
-  Command,
   Frame,
   GalleryVerticalEnd,
   Map,
@@ -146,6 +144,7 @@ const data = {
   ],
 }
 
+//  󰢷  Fix children content
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>

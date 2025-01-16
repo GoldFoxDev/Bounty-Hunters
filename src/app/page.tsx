@@ -1,5 +1,21 @@
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Newspaper, HelpCircle, ChefHat } from 'lucide-react'
+
+const typeIconMap = [
+  {
+    type: 'Article',
+    icon: <Newspaper />,
+  },
+  {
+    type: 'Question',
+    icon: <HelpCircle />,
+  },
+  {
+    type: 'Recipe',
+    icon: <ChefHat />,
+  }
+]
 
 // This is a mock data structure. In a real application, you'd fetch this from a database.
 const data = [
@@ -26,7 +42,7 @@ export default function Home() {
           <Link href={`/entity/${entity.id}`} key={entity.id}>
             <Card className="hover:border-border-hover">
               <CardHeader>
-                <CardTitle>{entity.name}</CardTitle>
+                <CardTitle className="flex gap-2 items-center">{typeIconMap.find((assoc) => assoc.type === entity.type)?.icon}{entity.name}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p>{entity.posted}</p>
