@@ -34,13 +34,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ClerkProvider>
-          <div className="flex gap-2 max-w-screen box-border">
             <SidebarProvider>
               <AppSidebar>
-                {children}
               </AppSidebar>
+              <div className="flex gap-2 max-w-screen box-border p-10">
+                {children}
+              </div>
             </SidebarProvider>
-          </div>
         </ClerkProvider>
       </body>
     </html>

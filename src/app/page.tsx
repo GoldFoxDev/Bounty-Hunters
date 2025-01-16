@@ -2,18 +2,20 @@ import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Newspaper, HelpCircle, ChefHat } from 'lucide-react'
 
+const IconClasses = "w-4 h-4";
+
 const typeIconMap = [
   {
     type: 'Article',
-    icon: <Newspaper />,
+    icon: <Newspaper className={IconClasses} />,
   },
   {
     type: 'Question',
-    icon: <HelpCircle />,
+    icon: <HelpCircle className={IconClasses} />,
   },
   {
     type: 'Recipe',
-    icon: <ChefHat />,
+    icon: <ChefHat className={IconClasses} />,
   }
 ]
 
