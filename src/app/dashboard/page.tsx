@@ -1,49 +1,52 @@
-import { auth } from '@clerk/nextjs'
-import { redirect } from 'next/navigation'
-import Link from 'next/link'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { AppSidebar } from "@/components/app-sidebar"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import { Separator } from "@/components/ui/separator"
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
 
-// This is a mock data structure. In a real application, you'd fetch this from a database.
-const userMemorials = [
-  { id: 1, name: 'John Doe', dateOfPassing: '2023-05-15' },
-  { id: 2, name: 'Jane Smith', dateOfPassing: '2023-05-10' },
-]
-
-export default function Dashboard() {
-  const { userId } = auth()
-
-  if (!userId) {
-    redirect('/sign-in')
-  }
-
+export default function Page() {
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold">Your Memorials</h1>
-      <Link href="/add-memorial">
-        <Button>Add New Memorial</Button>
-      </Link>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {userMemorials.map((memorial) => (
-          <Card key={memorial.id}>
-            <CardHeader>
-              <CardTitle>{memorial.name}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Date of Passing: {memorial.dateOfPassing}</p>
-              <div className="mt-4 space-x-2">
-                <Link href={`/memorial/${memorial.id}`}>
-                  <Button variant="outline">View</Button>
-                </Link>
-                <Button variant="outline">Edit</Button>
-                <Button variant="destructive">Delete</Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </div>
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+          <div className="flex items-center gap-2 px-4">
+            <SidebarTrigger className="-ml-1" />
+            <Separator orientation="vertical" className="mr-2 h-4" />
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem className="hidden md:block">
+                  <BreadcrumbLink href="#">
+                    Building Your Application
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="hidden md:block" />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        </header>
+        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+            <div className="aspect-video rounded-xl bg-muted/50" />
+            <div className="aspect-video rounded-xl bg-muted/50" />
+            <div className="aspect-video rounded-xl bg-muted/50" />
+          </div>
+          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
   )
 }
-
-
