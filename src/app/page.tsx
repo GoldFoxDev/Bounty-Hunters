@@ -28,18 +28,31 @@ export default function Home() {
     const [data, setData] = useState<Post[] | null>(null);
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch("/api/posts");
-            const data = await response.json();
-            setData(data.data);
+            try {
+                const response = await fetch("/api/posts");
+                if (!response.ok) {
+                    console.error(
+                        "Failed to fetch posts:",
+                        response.statusText
+                    );
+                    setData(null);
+                    return;
+                }
+                const result = await response.json();
+                setData(result.data);
+            } catch (error) {
+                console.error("Error fetching posts:", error);
+                setData(null);
+            }
         };
 
         fetchData();
     }, []);
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 w-full">
             <Search />
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center w-full">
                 <h1 className="text-3xl font-bold">Trending</h1>
                 <TestStateButton />
             </div>
