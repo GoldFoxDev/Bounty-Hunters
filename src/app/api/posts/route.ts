@@ -13,7 +13,7 @@ export type Post = {
 
 const userPromiseCache = new Map<string, Promise<Post[]>>();
 
-export async function fetchPosts() {
+async function fetchPosts() {
     const userPromise = userPromiseCache.get("posts") ?? fetchPostsImpl();
     userPromiseCache.set("posts", userPromise);
     return userPromise;
@@ -32,6 +32,6 @@ async function fetchPostsImpl() {
 }
 
 export async function GET() {
-    const data = await fetchPostsImpl();
+    const data = await fetchPosts();
     return Response.json({ data });
 }
