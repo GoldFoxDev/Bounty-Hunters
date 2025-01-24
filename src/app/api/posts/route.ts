@@ -39,6 +39,50 @@ async function fetchPostsImpl() {
     }
 }
 
+async function createPost(title: string, content: string) {
+    console.log(content);
+    try {
+        const { rows } = await sql`
+            INSERT INTO posts (title, user_id, post_type, created_at)
+            VALUES (${title}, 2, 'article', NOW())
+            RETURNING *
+        `;
+
+        const post: Post = {
+            id: rows[0].id,
+            title: rows[0].title,
+            created_at: rows[0].created_at,
+            post_type: rows[0].post_type,
+        };
+        return post;
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+}
+
+export async function POST(request: Request) {
+    try {
+        const { title, content } = await request.json();
+
+        if (!title || !content) {
+            return NextResponse.json(
+                { error: "Title and content are required" },
+                { status: 400 }
+            );
+        }
+
+        const post = await createPost(title, content);
+        return NextResponse.json({ data: post });
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json(
+            { error: "Failed to create post" },
+            { status: 500 }
+        );
+    }
+}
+
 export async function GET(request: Request) {
     // Make sure the function is named GET
     try {

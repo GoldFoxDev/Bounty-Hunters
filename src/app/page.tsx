@@ -6,6 +6,21 @@ import { Suspense, useEffect, useState } from "react";
 import { TestStateButton } from "@/components/TestStateButton";
 import { Search } from "@/components/Search";
 import { Post } from "@/app/api/posts/route";
+import { CreatePostDialog } from "@/components/CreatePostDialog";
+
+import { Skeleton } from "@/components/ui/skeleton";
+
+export function SkeletonCard() {
+    return (
+        <div className="flex flex-col space-y-3">
+            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+            <div className="space-y-2">
+                <Skeleton className="h-4 w-[250px]" />
+                <Skeleton className="h-4 w-[200px]" />
+            </div>
+        </div>
+    );
+}
 
 const IconClasses = "w-4 h-4";
 
@@ -60,7 +75,15 @@ export default function Home() {
                 <TestStateButton />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <Suspense fallback={<div>Loading..</div>}>
+                <Suspense
+                    fallback={
+                        <div>
+                            {Array.from(Array(10).keys()).map((id) => (
+                                <SkeletonCard key={id} />
+                            ))}
+                        </div>
+                    }
+                >
                     {data &&
                         data.map((entity) => (
                             <Link href={`/entity/${entity.id}`} key={entity.id}>
@@ -89,7 +112,7 @@ export default function Home() {
                         ))}
                 </Suspense>
             </div>
-            <form></form>
+            <CreatePostDialog />
         </div>
     );
 }
