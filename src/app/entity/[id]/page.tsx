@@ -38,8 +38,12 @@ const data = [
     },
 ];
 
+interface PageProps {
+    params: { id: string };
+}
+
 // This is a mock data structure. In a real application, you'd fetch this from a database.
-export default function EntityPage({ params }: { params: { id: string } }) {
+export default function EntityPage({ params }: PageProps) {
     const entity = data.find((m) => m.id === parseInt(params.id));
 
     if (!entity) {
