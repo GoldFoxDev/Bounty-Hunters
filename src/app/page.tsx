@@ -26,23 +26,26 @@ const typeIconMap = [
 
 export default function Home() {
     const [data, setData] = useState<Post[] | null>(null);
+    const [error, setError] = useState<Error | null>(null);
+
+    if (error) throw error; // This will trigger the error boundary
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch("/api/posts");
                 if (!response.ok) {
-                    console.error(
-                        "Failed to fetch posts:",
-                        response.statusText
-                    );
-                    setData(null);
+                    setError(new Error("Failed to fetch posts"));
                     return;
                 }
                 const result = await response.json();
+                if (!result.data || result.data.length === 0) {
+                    setError(new Error("No posts found"));
+                    return;
+                }
                 setData(result.data);
             } catch (error) {
-                console.error("Error fetching posts:", error);
-                setData(null);
+                setError(error as Error);
             }
         };
 

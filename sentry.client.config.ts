@@ -7,12 +7,8 @@ import * as Sentry from "@sentry/nextjs";
 Sentry.init({
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
 
-    beforeSend(event, hint) {
-        // Check if it is an exception, and if so, show the report dialog
-        if (event.exception && event.event_id) {
-            Sentry.showReportDialog({ eventId: event.event_id });
-        }
-        console.log(hint);
+    // Remove or modify the beforeSend hook
+    beforeSend(event) {
         return event;
     },
 

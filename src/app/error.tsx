@@ -2,9 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import * as Sentry from "@sentry/nextjs";
-import { toast } from "sonner";
 
 export default function ErrorPage({
     error,
@@ -13,41 +11,32 @@ export default function ErrorPage({
     error: Error & { digest?: string };
     reset: () => void;
 }) {
-    const router = useRouter();
+    const [eventId, setEventId] = useState<string | null>(null);
     const [showFeedback, setShowFeedback] = useState(false);
     const [feedback, setFeedback] = useState("");
-    const [eventId, setEventId] = useState<string | null>(null);
 
     useEffect(() => {
-        // Capture the error in Sentry and store the eventId
-        const eventId = Sentry.captureException(error);
-        setEventId(eventId);
+        const id = Sentry.captureException(error);
+        setEventId(id);
         console.error("Page Error:", error);
     }, [error]);
 
     const handleSubmitFeedback = async () => {
+        if (!eventId) return;
+
         try {
-            if (!eventId) {
-                throw new Error("Sentry ID not found");
-            }
-
-            console.log("submitting feedback!");
-            // Submit user feedback to Sentry
-            Sentry.captureFeedback({
-                name: "Anonymous User",
-                email: "anonymous@example.com",
+            const userFeedback = {
+                name: "John Doe",
+                email: "john@doe.com",
                 message: feedback,
-            });
-            console.log("submitting feedback!");
-            // Submit user feedback to Sentry
+            };
+            console.log("userFeedback", userFeedback);
+            Sentry.captureFeedback(userFeedback);
 
-            toast.info("Navigating...", {
-                description: `Moving to Report Confirmation page`,
-                duration: 2000,
-            });
-            router.push("/error-report-submitted");
-        } catch (e) {
-            console.error("Failed to submit feedback:", e);
+            setShowFeedback(false);
+            setFeedback("");
+        } catch (err) {
+            console.error("Failed to submit feedback:", err);
         }
     };
 
@@ -57,7 +46,6 @@ export default function ErrorPage({
             <p className="text-muted-foreground">
                 {error.message || "An unexpected error occurred"}
             </p>
-
             {!showFeedback ? (
                 <div className="flex gap-4">
                     <Button onClick={() => reset()}>Try again</Button>

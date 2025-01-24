@@ -24,7 +24,7 @@ async function fetchPosts() {
 
 async function fetchPostsImpl() {
     try {
-        const { rows } = await sql`SELECT * from posts`;
+        const { rows } = await sql`SELECT * from tests`;
         console.log("rows:", rows);
         const posts: Post[] = rows.map((row) => ({
             id: row.id,
