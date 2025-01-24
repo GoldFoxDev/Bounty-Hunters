@@ -22,4 +22,3 @@ Violations of the Code of Conduct may result in a warning or ban from the projec
 ---
 
 Thank you for your contribution! Let’s make a meaningful impact together.
-

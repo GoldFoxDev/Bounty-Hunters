@@ -81,7 +81,6 @@ body {
   --sidebar-ring: 45 80% 60%;
 }
 
-
 @layer base {
   * {
     @apply border-border;
@@ -90,7 +89,6 @@ body {
     @apply bg-background text-foreground;
   }
 }
-
 
 .masonry-grid {
   columns: 4 250px;

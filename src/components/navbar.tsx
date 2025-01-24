@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import { UserButton, SignInButton, SignUpButton, useUser } from '@clerk/nextjs'
-import { Button } from '@/components/ui/button'
+import Link from "next/link";
+import { UserButton, SignInButton, SignUpButton, useUser } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
-  const { isSignedIn } = useUser()
+  const { isSignedIn } = useUser();
 
   return (
     <nav className="bg-background border-b">
@@ -40,7 +40,5 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-  )
+  );
 }
-
-

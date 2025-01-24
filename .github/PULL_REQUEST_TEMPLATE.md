@@ -5,6 +5,7 @@ A clear and concise description of what this PR does and why it is needed.
 ### Related Issues
 
 Link any related issues:
+
 - Closes #[issue-number]
 
 ### Changes Made
@@ -26,4 +27,3 @@ Include screenshots of UI/UX changes or any visual representation.
 ### Additional Notes
 
 Any other relevant information.
-

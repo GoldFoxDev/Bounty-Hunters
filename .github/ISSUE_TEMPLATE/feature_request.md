@@ -30,5 +30,3 @@ Add any other context, screenshots, or mockups that might help clarify your prop
 
 - [ ] I have searched the [existing issues](https://github.com/lcpichette/healthcare-memorial/issues) to ensure this feature hasn’t already been requested.
 - [ ] I am willing to submit a PR if this feature is approved.
-
-

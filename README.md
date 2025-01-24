@@ -7,7 +7,7 @@ Receiving and providing help online has a few common issues:
 
 Here's how I propose this can be fixed:
 
-1. This can be saved by changing how we structure requesting for help; Instead of having search + posting questions separate, let's combine them. When you need help, you describe your issue. This will search for other posted issues and list potentially similar issues. If there are none, you are able to post an issue at a cost. 
+1. This can be saved by changing how we structure requesting for help; Instead of having search + posting questions separate, let's combine them. When you need help, you describe your issue. This will search for other posted issues and list potentially similar issues. If there are none, you are able to post an issue at a cost.
 2. Everyone new gets some currency to start out with, and the only way to gain new currency is to answer questions.
 
 ## Details and Thought Rationale
@@ -32,6 +32,8 @@ Suggest ranges for question bounties with reasonable minimums as per what's norm
 
 We want to regulate answers by encouraging higher bounties for higher quality answers. For easier questions lower bounties are reasonable, but at this point, it's more likely they'll be able to find the answer to their question via historical answers. Another non-trivial consideration would be package, system, and product versions and their impact on question relevance.
 
+Add motions, animations, and more. Interacting with this project should feel immersive. I'd likely use [Motion](https://examples.motion.dev/js/html-content)
+
 ## Getting Started
 
 First, run the development server:
@@ -47,4 +49,3 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 ## Funding
 
 Vercel will cover the bill for awhile. I don't expect this to blow up anyways
-

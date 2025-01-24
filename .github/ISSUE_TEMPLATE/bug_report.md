@@ -35,5 +35,3 @@ What actually happened. Include screenshots if applicable.
 ### Additional Information
 
 Any other context or information you feel is relevant.
-
-
