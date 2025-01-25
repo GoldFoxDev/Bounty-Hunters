@@ -142,10 +142,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </SidebarHeader>
                 <SidebarContent>
                     <NavMain items={navigationData.navMain} />
-                    <NavProjects projects={navigationData.projects} />
+                    {navigationData.projects?.length > 0 && (
+                        <NavProjects projects={navigationData.projects} />
+                    )}
                 </SidebarContent>
                 <SidebarFooter>
-                    {userData && <NavUser user={userData} />}
+                    {isSignedIn ? (
+                        <>{userData && <NavUser user={userData} />}</>
+                    ) : (
+                        <Sidebar collapsible="icon" {...props}>
+                            <SignInPrompt />
+                        </Sidebar>
+                    )}
                 </SidebarFooter>
                 <SidebarRail />
             </Sidebar>
