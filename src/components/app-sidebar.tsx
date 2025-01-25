@@ -150,9 +150,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     {isSignedIn ? (
                         <>{userData && <NavUser user={userData} />}</>
                     ) : (
-                        <Sidebar collapsible="icon" {...props}>
-                            <SignInPrompt />
-                        </Sidebar>
+                        <SignInPrompt />
                     )}
                 </SidebarFooter>
                 <SidebarRail />
