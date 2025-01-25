@@ -7,6 +7,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/react";
+import Navbar from "@/components/navbar";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -36,10 +37,15 @@ export default function RootLayout({
             >
                 <ClerkProvider>
                     <SidebarProvider>
-                        <AppSidebar></AppSidebar>
-                        <div className="flex gap-2 max-w-screen w-full box-border p-10">
-                            {children}
-                            <Toaster />
+                        <AppSidebar className="hidden md:block" />
+                        <div className="w-full">
+                            <div className="block md:hidden">
+                                <Navbar />
+                            </div>
+                            <div className="flex gap-2 max-w-screen w-full box-border p-10">
+                                {children}
+                                <Toaster />
+                            </div>
                         </div>
                     </SidebarProvider>
                 </ClerkProvider>

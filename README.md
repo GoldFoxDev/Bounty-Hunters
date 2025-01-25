@@ -18,6 +18,35 @@ The way I aim to make both directions of this assistance exchange more fun is by
 
 The theme here is important, and since the target demographic will predominantly be software engineering, with its pre-existing culture of "bug bounties", I think the theme "Bounty Hunters" will feel familiar but not overdone.
 
+## Terminology
+
+-   **Bounty**: The amount of currency a user is able to spend on a question.
+-   **Question**: A user's request for help.
+-   **Answer**: A user's response to a question. This can be a standard Response, or an Article.
+-   **Response**: A collection of Blocks.
+-   **Block**: Contains text, Type, and a position.
+-   **Type**: Can be any specific string-value, fitting whatever I have set in the database, such as: `Anchor`, `Header1`, `Paragraph`, etc.
+-   `**Article**: A superset of a Response which is SEO-indexed. Requires a certain level of credibility from the poster before being accesible by the poster. Everyone can view existing articles, though.
+
+## What Currently Exists
+
+-   Query caching w/ Next + React
+-   Authentication w/ Clerk
+-   Query logging and error reporting w/ Sentry
+-   Consistent theme w/ Shadcn + Tailwind
+-   Database w/ Vercel's Postgres (Neon)
+-   Analytics w/ Vercel
+
+## Sucess Migration Considerations
+
+If this is to ever become a serious project that supports a very large nunber of active users, then I'd want to make a few changes:
+
+-   Analytics -> Posthog
+-   Backend -> Laravel Inertia
+-   Authentication -> Laravel Inertia
+
+With future migration possibilities in mind, I will be trying to keep the codebase as small and simple as possible and focusing on quality features over a quantity of features.
+
 ## Roadmap
 
 ### Foundation (2 Weeks)

@@ -10,6 +10,7 @@
     },
     "dependencies": {
         "@clerk/nextjs": "6.9.6",
+        "@lemonsqueezy/lemonsqueezy.js": "^4.0.0",
         "@radix-ui/react-avatar": "^1.1.2",
         "@radix-ui/react-collapsible": "^1.1.2",
         "@radix-ui/react-dialog": "^1.1.4",
@@ -31,6 +32,7 @@
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
         "require-in-the-middle": "^7.4.0",
+        "shadcn-ui": "^0.9.4",
         "sonner": "^1.7.2",
         "tailwind-merge": "^2.6.0",
         "tailwindcss-animate": "1.0.6"
