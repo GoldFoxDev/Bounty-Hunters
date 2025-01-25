@@ -6,7 +6,6 @@ import { useUser } from "@clerk/nextjs";
 import { NavMain } from "@/components/nav-main";
 import { NavProjects } from "@/components/nav-projects";
 import { NavUser } from "@/components/nav-user";
-import { TeamSwitcher } from "@/components/team-switcher";
 import {
     Sidebar,
     SidebarContent,
@@ -18,13 +17,7 @@ import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { Button } from "@/components/ui/button";
 import { SignInButton } from "@clerk/nextjs";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-    BookOpen,
-    Bot,
-    GalleryVerticalEnd,
-    Settings2,
-    TerminalSquare,
-} from "lucide-react";
+import { BookOpen, Bot, Settings2, TerminalSquare } from "lucide-react";
 
 // Add these components before the SignInPrompt
 function SidebarSkeleton() {
@@ -73,13 +66,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const [isNavigationReady, setIsNavigationReady] = React.useState(false);
 
     const navigationData = {
-        teams: [
-            {
-                name: "Bounty Hunters",
-                logo: GalleryVerticalEnd,
-                plan: "Free",
-            },
-        ],
         navMain: [
             {
                 title: "Dashboard",
@@ -149,7 +135,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <ErrorBoundary fallback={<SidebarError />}>
             <Sidebar collapsible="icon" {...props}>
                 <SidebarHeader>
-                    <TeamSwitcher teams={navigationData.teams} />
+                    <div className="grid flex-1 text-left text-sm leading-tight p-2">
+                        <span className="font-semibold">Bounty Board</span>
+                        <span className="truncate text-xs">Basic</span>
+                    </div>
                 </SidebarHeader>
                 <SidebarContent>
                     <NavMain items={navigationData.navMain} />
