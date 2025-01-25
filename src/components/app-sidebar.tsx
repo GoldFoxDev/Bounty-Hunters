@@ -1,164 +1,165 @@
 "use client";
 
 import * as React from "react";
-import {
-  BookOpen,
-  Bot,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  TerminalSquare,
-} from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 
 import { NavMain } from "@/components/nav-main";
 import { NavProjects } from "@/components/nav-projects";
 import { NavUser } from "@/components/nav-user";
 import { TeamSwitcher } from "@/components/team-switcher";
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarRail,
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarHeader,
+    SidebarRail,
 } from "@/components/ui/sidebar";
+import { ErrorBoundary } from "@/components/ui/error-boundary";
+import { Button } from "@/components/ui/button";
+import { SignInButton } from "@clerk/nextjs";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+    BookOpen,
+    Bot,
+    GalleryVerticalEnd,
+    Settings2,
+    TerminalSquare,
+} from "lucide-react";
 
-// This is sample data.
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-  ],
-  navMain: [
-    {
-      title: "Playground",
-      url: "#",
-      icon: TerminalSquare,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
-  ],
-};
+// Add these components before the SignInPrompt
+function SidebarSkeleton() {
+    return (
+        <div className="space-y-4 p-4">
+            <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-[400px] w-full" />
+            <Skeleton className="h-10 w-full" />
+        </div>
+    );
+}
 
-//  󰢷  Fix children content
+function SidebarError() {
+    return (
+        <div className="flex h-full items-center justify-center p-4 text-center">
+            <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">
+                    Failed to load sidebar content
+                </p>
+                <button
+                    onClick={() => window.location.reload()}
+                    className="text-sm underline"
+                >
+                    Try again
+                </button>
+            </div>
+        </div>
+    );
+}
+
+function SignInPrompt() {
+    return (
+        <div className="flex h-full flex-col items-center justify-center gap-4 p-4 text-center">
+            <p className="text-sm text-muted-foreground">
+                Sign in to access your dashboard
+            </p>
+            <SignInButton>
+                <Button variant="default">Sign In</Button>
+            </SignInButton>
+        </div>
+    );
+}
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  return (
-    <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
-      </SidebarHeader>
-      <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
-      </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
-      <SidebarRail />
-    </Sidebar>
-  );
+    const { user, isLoaded, isSignedIn } = useUser();
+    const [isNavigationReady, setIsNavigationReady] = React.useState(false);
+
+    const navigationData = {
+        teams: [
+            {
+                name: "Bounty Hunters",
+                logo: GalleryVerticalEnd,
+                plan: "Free",
+            },
+        ],
+        navMain: [
+            {
+                title: "Dashboard",
+                url: "/dashboard",
+                icon: TerminalSquare,
+                isActive: true,
+            },
+            {
+                title: "Bounties",
+                url: "/bounties",
+                icon: Bot,
+            },
+            {
+                title: "Documentation",
+                url: "/docs",
+                icon: BookOpen,
+            },
+            {
+                title: "Settings",
+                url: "/settings",
+                icon: Settings2,
+                items: [
+                    {
+                        title: "Profile",
+                        url: "/settings/profile",
+                    },
+                    {
+                        title: "Account",
+                        url: "/settings/account",
+                    },
+                ],
+            },
+        ],
+        projects: [], // Empty projects array as requested
+    };
+
+    React.useEffect(() => {
+        const timer = setTimeout(() => setIsNavigationReady(true), 500);
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (!isLoaded || !isNavigationReady) {
+        return (
+            <Sidebar collapsible="icon" {...props}>
+                <SidebarSkeleton />
+            </Sidebar>
+        );
+    }
+
+    if (!isSignedIn) {
+        return (
+            <Sidebar collapsible="icon" {...props}>
+                <SignInPrompt />
+            </Sidebar>
+        );
+    }
+
+    const userData = user
+        ? {
+              name: user.fullName || user.username || "Anonymous",
+              email: user.primaryEmailAddress?.emailAddress || "",
+              avatar: user.imageUrl,
+          }
+        : undefined;
+
+    return (
+        <ErrorBoundary fallback={<SidebarError />}>
+            <Sidebar collapsible="icon" {...props}>
+                <SidebarHeader>
+                    <TeamSwitcher teams={navigationData.teams} />
+                </SidebarHeader>
+                <SidebarContent>
+                    <NavMain items={navigationData.navMain} />
+                    <NavProjects projects={navigationData.projects} />
+                </SidebarContent>
+                <SidebarFooter>
+                    {userData && <NavUser user={userData} />}
+                </SidebarFooter>
+                <SidebarRail />
+            </Sidebar>
+        </ErrorBoundary>
+    );
 }
