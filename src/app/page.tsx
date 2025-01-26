@@ -5,7 +5,6 @@ import { Newspaper, HelpCircle, ChefHat } from "lucide-react";
 import { TestStateButton } from "@/components/TestStateButton";
 import { Search } from "@/components/Search";
 import { Post } from "@/app/api/posts/route";
-import { CreatePostDialog } from "@/components/CreatePostDialog";
 import { ErrorMessage } from "@/components/ErrorMessage";
 
 import { useFetch } from "@/hooks/useFetch";
@@ -82,7 +81,6 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                 {isLoading ? <SkeletonTrending /> : <Trending data={data} />}
             </div>
-            <CreatePostDialog />
         </div>
     );
 }

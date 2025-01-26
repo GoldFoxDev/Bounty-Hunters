@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Plus } from "lucide-react";
 import { useState } from "react";
 
 export function CreatePostDialog() {
@@ -44,11 +43,8 @@ export function CreatePostDialog() {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button
-                    className="fixed bottom-4 right-4 h-14 w-14 rounded-full p-0"
-                    size="icon"
-                >
-                    <Plus className="h-10 w-10 font-bold text-xl" />
+                <Button className="p-0" variant="link">
+                    Post New Question
                 </Button>
             </DialogTrigger>
             <DialogContent>

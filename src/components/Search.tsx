@@ -15,6 +15,7 @@ import { Suspense, useEffect, useRef } from "react";
 import { useState } from "react";
 import { Post } from "@/app/api/posts/route";
 import { useRouter } from "next/navigation";
+import { CreatePostDialog } from "./CreatePostDialog";
 
 interface Props {
     data: Post[] | null;
@@ -113,7 +114,9 @@ export function Search() {
                     />
                     {isOpen && (
                         <CommandList>
-                            <CommandEmpty>No results found.</CommandEmpty>
+                            <CommandEmpty>
+                                <CreatePostDialog />
+                            </CommandEmpty>
                             <Suspense fallback={<></>}>
                                 <PostCommands data={data} setData={setData} />
                                 <CommandSeparator />
