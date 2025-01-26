@@ -28,6 +28,39 @@ const typeIconMap = [
     },
 ];
 
+function SkeletonTrending() {
+    return Array.from(Array(6).keys()).map((id) => (
+        <QuestionSkeleton key={id} />
+    ));
+}
+interface TrendingProps {
+    data: Post[] | null;
+}
+function Trending({ data }: TrendingProps) {
+    if (!data) {
+        return <ErrorMessage message="No posts found" />;
+    }
+    return data.map((entity) => (
+        <Link href={`/${entity.post_type}/${entity.id}`} key={entity.id}>
+            <Card className="hover:border-border-hover">
+                <CardHeader>
+                    <CardTitle className="flex gap-2 items-start h-16">
+                        {
+                            typeIconMap.find(
+                                (assoc) => assoc.type === entity.post_type
+                            )?.icon
+                        }
+                        {entity.title}
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <p>{entity.created_at?.toLocaleString("en-US")}</p>
+                </CardContent>
+            </Card>
+        </Link>
+    ));
+}
+
 export default function Home() {
     const { data, error, isLoading } = useFetch<Post[]>({
         url: "/api/posts",
@@ -35,22 +68,8 @@ export default function Home() {
         emptyDataMessage: "No posts found",
     });
 
-    if (isLoading) {
-        return (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-                {Array.from(Array(6).keys()).map((id) => (
-                    <QuestionSkeleton key={id} />
-                ))}
-            </div>
-        );
-    }
-
     if (error) {
         return <ErrorMessage message={error.message} />;
-    }
-
-    if (!data) {
-        return <ErrorMessage message="No posts found" />;
     }
 
     return (
@@ -61,31 +80,7 @@ export default function Home() {
                 <TestStateButton />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-                {data.map((entity) => (
-                    <Link
-                        href={`/${entity.post_type}/${entity.id}`}
-                        key={entity.id}
-                    >
-                        <Card className="hover:border-border-hover">
-                            <CardHeader>
-                                <CardTitle className="flex gap-2 items-start h-16">
-                                    {
-                                        typeIconMap.find(
-                                            (assoc) =>
-                                                assoc.type === entity.post_type
-                                        )?.icon
-                                    }
-                                    {entity.title}
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p>
-                                    {entity.created_at?.toLocaleString("en-US")}
-                                </p>
-                            </CardContent>
-                        </Card>
-                    </Link>
-                ))}
+                {isLoading ? <SkeletonTrending /> : <Trending data={data} />}
             </div>
             <CreatePostDialog />
         </div>

@@ -52,7 +52,10 @@ function SignInPrompt() {
     return (
         <div className="flex h-full items-center justify-between gap-4 p-4 text-center">
             <SignInButton>
-                <Button variant="default">Sign In</Button>
+                <Button variant="ghost">Sign In</Button>
+            </SignInButton>
+            <SignInButton>
+                <Button variant="outline">Sign Up</Button>
             </SignInButton>
         </div>
     );
