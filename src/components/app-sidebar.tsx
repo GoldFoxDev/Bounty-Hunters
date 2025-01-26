@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useUser } from "@clerk/nextjs";
+import { useClerk, useUser } from "@clerk/nextjs";
 
 import { NavMain } from "@/components/nav-main";
 import { NavProjects } from "@/components/nav-projects";
@@ -50,10 +50,7 @@ function SidebarError() {
 
 function SignInPrompt() {
     return (
-        <div className="flex h-full flex-col items-center justify-center gap-4 p-4 text-center">
-            <p className="text-sm text-muted-foreground">
-                Sign in to access your dashboard
-            </p>
+        <div className="flex h-full items-center justify-between gap-4 p-4 text-center">
             <SignInButton>
                 <Button variant="default">Sign In</Button>
             </SignInButton>
@@ -63,6 +60,7 @@ function SignInPrompt() {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const { user, isLoaded, isSignedIn } = useUser();
+    const { signOut } = useClerk();
     const [isNavigationReady, setIsNavigationReady] = React.useState(false);
 
     const navigationData = {
@@ -115,19 +113,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         );
     }
 
-    if (!isSignedIn) {
-        return (
-            <Sidebar collapsible="icon" {...props}>
-                <SignInPrompt />
-            </Sidebar>
-        );
-    }
-
     const userData = user
         ? {
               name: user.fullName || user.username || "Anonymous",
               email: user.primaryEmailAddress?.emailAddress || "",
               avatar: user.imageUrl,
+              onSignOut: () => signOut(),
           }
         : undefined;
 
