@@ -106,7 +106,7 @@ export function Search() {
             <div className="absolute top-0 left-0 w-full">
                 <Command
                     ref={commandRef}
-                    className="rounded-lg border shadow-md transition-[height] duration-200 h-fit"
+                    className="rounded-lg border border-primary/30 hover:border-primary/50 active:border-primary/50 shadow-md transition-[height] duration-200 h-fit"
                 >
                     <CommandInput
                         placeholder="Type a command or search..."
