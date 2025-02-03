@@ -22,10 +22,17 @@ import { BookOpen, Bot, Settings2, TerminalSquare } from "lucide-react";
 // Add these components before the SignInPrompt
 function SidebarSkeleton() {
     return (
-        <div className="space-y-4 p-4">
-            <Skeleton className="h-10 w-full" />
-            <Skeleton className="h-[400px] w-full" />
-            <Skeleton className="h-10 w-full" />
+        <div className="flex flex-col justify-between h-full">
+            <div className="space-y-4 p-4">
+                <Skeleton className="h-10 w-full mb-8" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+            </div>
+            <div className="flex justify-between p-4 gap-4">
+                <Skeleton className="h-10 w-20" />
+                <Skeleton className="h-10 w-20" />
+            </div>
         </div>
     );
 }
@@ -139,9 +146,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <ErrorBoundary fallback={<SidebarError />}>
             <Sidebar collapsible="icon" {...props}>
                 <SidebarHeader>
-                    <div className="grid flex-1 text-left text-sm leading-tight p-2">
-                        <span className="font-semibold">Bounty Board</span>
-                        <span className="truncate text-xs">Basic</span>
+                    <div className="grid flex-1 text-left gap-2 leading-tight p-2">
+                        <span className="font-semibold text-lg">
+                            Bounty Board
+                        </span>
+                        {/* Add user's coins here -- query users tbl by clerk id*/}
                     </div>
                 </SidebarHeader>
                 <SidebarContent>
