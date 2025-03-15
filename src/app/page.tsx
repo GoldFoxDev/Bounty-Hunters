@@ -32,9 +32,11 @@ function SkeletonTrending() {
         <QuestionSkeleton key={id} />
     ));
 }
+
 interface TrendingProps {
     data: Post[] | null;
 }
+
 function Trending({ data }: TrendingProps) {
     if (!data) {
         return <ErrorMessage message="No posts found" />;

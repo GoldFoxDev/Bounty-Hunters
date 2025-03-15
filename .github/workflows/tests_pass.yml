@@ -1,0 +1,22 @@
+name: Main workflow
+
+on:
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Use Node
+      uses: actions/setup-node@v1
+      with:
+        version: 23.6.x
+    - name: npm install, build, and test
+      run: |
+        npm install -g pnpm
+        pnpm install
+        pnpm run build --if-present
+        pnpm test
